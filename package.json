@@ -1,0 +1,33 @@
+{
+  "name": "leonardo-barbosa-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "lint": "eslint .",
+    "format:check": "prettier --check src index.html package.json vite.config.js eslint.config.js vercel.json README.md",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@fontsource-variable/dm-sans": "^5.2.7",
+    "@fontsource/barlow-condensed": "^5.2.7",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@tailwindcss/vite": "^4.1.15",
+    "@vitejs/plugin-react": "^5.1.0",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^16.4.0",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.1.15",
+    "vite": "^7.1.12"
+  }
+}

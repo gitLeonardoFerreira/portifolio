@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#101b2b"/>
+  <circle cx="965" cy="288" r="245" fill="none" stroke="#294051" stroke-width="2"/>
+  <circle cx="965" cy="288" r="165" fill="none" stroke="#6bd5d7" stroke-width="2" opacity=".7"/>
+  <path d="M700 388c90-128 220-123 284-46 80-91 175-38 216 11" fill="none" stroke="#6bd5d7" stroke-width="4" opacity=".8"/>
+  <text x="88" y="145" fill="#6bd5d7" font-family="Arial,sans-serif" font-size="28" letter-spacing="6">ENGENHARIA DE SOFTWARE</text>
+  <text x="82" y="320" fill="#eaf0f2" font-family="Arial,sans-serif" font-size="98" font-weight="800">LEONARDO</text>
+  <text x="82" y="422" fill="#eaf0f2" font-family="Arial,sans-serif" font-size="98" font-weight="800">BARBOSA</text>
+  <text x="88" y="500" fill="#b4c2cd" font-family="Arial,sans-serif" font-size="29">Backend Python · aplicações web · automação</text>
+</svg>
