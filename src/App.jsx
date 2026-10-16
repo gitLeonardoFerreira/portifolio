@@ -163,81 +163,77 @@ function Reveal({ children, className = '', as = 'div' }) {
   )
 }
 
-const perspectives = [
-  { title: 'imaginar', caption: '01 / CURIOSIDADE' },
-  { title: 'construir', caption: '02 / ENGENHARIA' },
-  { title: 'proteger', caption: '03 / DIREÇÃO' },
-]
-
 function OrbitArt() {
   const [perspective, setPerspective] = useState(0)
-  const hasPortraits = portraits.length > 0
-  const current = hasPortraits
-    ? {
-        title: portraits[perspective].label,
-        caption: `${String(perspective + 1).padStart(2, '0')} / RETRATO`,
-      }
-    : perspectives[perspective]
+  const [turning, setTurning] = useState(false)
+  const current = portraits[perspective]
+  const next = portraits[(perspective + 1) % portraits.length]
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = window.setInterval(() => {
+      if (document.visibilityState === 'visible') setTurning(true)
+    }, 7000)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  function turnPortrait() {
+    if (turning) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setPerspective((index) => (index + 1) % portraits.length)
+      return
+    }
+    setTurning(true)
+  }
+
+  function finishTurn(event) {
+    if (event.propertyName !== 'transform' || event.target !== event.currentTarget) return
+    setPerspective((index) => (index + 1) % portraits.length)
+    setTurning(false)
+  }
+
   return (
     <div
-      className={`orbit-art ${hasPortraits ? 'has-portrait' : ''}`}
+      className="orbit-art has-portrait"
       data-perspective={perspective}
-      aria-label={
-        hasPortraits
-          ? 'Retratos interativos de Leonardo'
-          : 'Ilustração abstrata de uma nuvem atravessada por órbitas'
-      }
+      aria-label="Retratos interativos de Leonardo"
     >
-      <div className="orbit-grid" aria-hidden="true" />
-      <div className="orbit-circle orbit-circle-outer" aria-hidden="true" />
-      <div className="orbit-circle orbit-circle-inner" aria-hidden="true" />
-      <div className="orbit-trail" aria-hidden="true" />
-      <div className="cloud-mass" aria-hidden="true">
-        <span className="cloud-lobe cloud-lobe-one" />
-        <span className="cloud-lobe cloud-lobe-two" />
-        <span className="cloud-lobe cloud-lobe-three" />
-        <span className="cloud-base" />
-      </div>
-      {hasPortraits ? (
-        <img
-          className="orbit-portrait"
-          src={portraits[perspective].src}
-          alt={portraits[perspective].alt}
+      <span className="sky-sun" aria-hidden="true" />
+      <svg className="sky-cloud" viewBox="0 0 620 410" fill="none" aria-hidden="true">
+        <path
+          d="M110 375c-48 0-85-35-85-79 0-42 33-75 75-79 8-75 63-128 133-128 45 0 87 20 114 55 21-16 45-24 73-24 69 0 124 54 124 121 31 12 51 41 51 72 0 35-29 62-65 62H110Z"
+          fill="white"
+          stroke="currentColor"
+          strokeWidth="5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
-      ) : (
-        <div className="orbit-center" aria-hidden="true">
-          <span>LB</span>
-          <svg className="orbit-spark" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-            <path
-              d="M18 1v34M1 18h34M6 6l24 24M30 6 6 30"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-          </svg>
+      </svg>
+      <div className="portrait-stage">
+        <div
+          className={`portrait-turn ${turning ? 'is-turning' : ''}`}
+          onTransitionEnd={finishTurn}
+        >
+          <img
+            className="orbit-portrait portrait-front"
+            src={current.src}
+            alt={current.alt}
+            fetchPriority={perspective === 0 ? 'high' : undefined}
+          />
+          <img className="orbit-portrait portrait-back" src={next.src} alt="" />
         </div>
-      )}
-      <span className="orbit-coordinate orbit-coordinate-top">
-        23° 33′ S<br />
-        46° 38′ W
-      </span>
-      <span className="orbit-coordinate orbit-coordinate-bottom">IDEIAS EM MOVIMENTO</span>
-      <span className="orbit-node orbit-node-one" aria-hidden="true" />
-      <span className="orbit-node orbit-node-two" aria-hidden="true" />
+      </div>
       <div className="orbit-controls">
         <div className="orbit-caption">
-          <span>{current.caption}</span>
-          <strong>{current.title}</strong>
+          <span>{String(perspective + 1).padStart(2, '0')} / 03 POSES</span>
+          <strong>{current.label}</strong>
         </div>
         <button
           type="button"
           className="orbit-next"
-          aria-label={`${hasPortraits ? 'Mudar pose' : 'Mudar perspectiva visual'}, atual: ${current.title}`}
-          onClick={() =>
-            setPerspective(
-              (perspective + 1) % (hasPortraits ? portraits.length : perspectives.length),
-            )
-          }
+          aria-label={`Mudar pose, atual: ${current.label}`}
+          disabled={turning}
+          onClick={turnPortrait}
         >
           <ArrowIcon />
         </button>
@@ -262,20 +258,15 @@ function Hero() {
             </span>
           </h1>
           <p className="hero-kicker">
-            Do problema à solução,
-            <br />
-            <em>sem perder o caminho.</em>
+            Ideias no ar. <em>Código no mundo real.</em>
           </p>
           <p className="hero-description">
-            Estudante de Engenharia de Software. Construo aplicações com foco em backend Python,
-            automação e IA — enquanto aprofundo meu caminho em cloud security.
+            Estudante de Engenharia de Software. Crio soluções em Python, web e IA, com interesse
+            crescente em cloud security.
           </p>
           <div className="hero-actions">
             <Link to="/#projetos" className="button button-primary">
               Conheça meus projetos <ArrowIcon diagonal />
-            </Link>
-            <Link to="/#sobre" className="text-link hero-more">
-              Mais sobre mim <ArrowIcon diagonal />
             </Link>
           </div>
         </div>
@@ -494,7 +485,11 @@ function AboutSection() {
                 <strong>Estágio · presencial, híbrido ou remoto</strong>
               </div>
             </div>
-            <a className="text-link about-resume" href="/Leonardo_Barbosa_Curriculo.pdf" download>
+            <a
+              className="text-link about-resume"
+              href={`${import.meta.env.BASE_URL}Leonardo_Barbosa_Curriculo.pdf`}
+              download
+            >
               Baixar currículo <ArrowIcon diagonal />
             </a>
           </Reveal>

@@ -26,8 +26,15 @@ npm run preview
 - Edite os estudos de caso em `src/data/projects.js`.
 - O número e a mensagem do WhatsApp ficam em `src/lib/contact.js`.
 - O currículo disponível para download fica em `public/Leonardo_Barbosa_Curriculo.pdf`.
-- A ilustração interativa da abertura foi preparada para receber fotografias reais de Leonardo após a seleção e otimização das poses. Ela funciona sem fotografias enquanto essa etapa não é concluída.
+- Os retratos usados na abertura ficam em `public/portraits/`, e a ordem das poses fica em `src/data/portraits.js`. O retrato gira automaticamente a cada sete segundos e também pode ser trocado pelo botão; a animação respeita a preferência de movimento reduzido.
 
 ## Publicação
 
-O projeto pode ser importado na Vercel como aplicação Vite. `vercel.json` encaminha as rotas dos estudos de caso para o aplicativo React. A publicação deve ocorrer depois da revisão do conteúdo e dos recursos visuais.
+O GitHub Pages publica automaticamente a branch `main` pelo fluxo `.github/workflows/pages.yml`. A compilação usa a base `/portifolio/` e rotas com `#`, permitindo abrir os estudos de caso na prévia pública. Para conferir localmente:
+
+```bash
+GITHUB_PAGES=true npm run build
+GITHUB_PAGES=true npm run preview
+```
+
+O projeto também pode ser importado na Vercel como aplicação Vite. Nesse caso, `vercel.json` encaminha as rotas dos estudos de caso para o aplicativo React.

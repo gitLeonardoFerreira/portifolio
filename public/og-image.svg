@@ -1,10 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#101b2b"/>
-  <circle cx="965" cy="288" r="245" fill="none" stroke="#294051" stroke-width="2"/>
-  <circle cx="965" cy="288" r="165" fill="none" stroke="#6bd5d7" stroke-width="2" opacity=".7"/>
-  <path d="M700 388c90-128 220-123 284-46 80-91 175-38 216 11" fill="none" stroke="#6bd5d7" stroke-width="4" opacity=".8"/>
-  <text x="88" y="145" fill="#6bd5d7" font-family="Arial,sans-serif" font-size="28" letter-spacing="6">ENGENHARIA DE SOFTWARE</text>
-  <text x="82" y="320" fill="#eaf0f2" font-family="Arial,sans-serif" font-size="98" font-weight="800">LEONARDO</text>
-  <text x="82" y="422" fill="#eaf0f2" font-family="Arial,sans-serif" font-size="98" font-weight="800">BARBOSA</text>
-  <text x="88" y="500" fill="#b4c2cd" font-family="Arial,sans-serif" font-size="29">Backend Python · aplicações web · automação</text>
+  <defs>
+    <linearGradient id="sky" x2="1" y2="1">
+      <stop stop-color="#8bcfff"/>
+      <stop offset="1" stop-color="#e3f7ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#sky)"/>
+  <circle cx="995" cy="156" r="85" fill="#ffe28a" stroke="#17344d" stroke-width="5"/>
+  <path d="M755 515c-47 0-83-34-83-78 0-42 31-75 73-79 10-61 61-106 123-106 44 0 82 20 105 53 19-15 44-24 72-24 66 0 119 52 121 117 43 5 75 38 75 78 0 44-37 79-84 79H755Z" fill="white" stroke="#17344d" stroke-width="5"/>
+  <text x="80" y="105" fill="#174c9e" font-family="Arial,sans-serif" font-size="28" font-weight="700" letter-spacing="4">PORTFÓLIO · 2026</text>
+  <text x="76" y="275" fill="#17344d" font-family="Arial,sans-serif" font-size="105" font-weight="900" letter-spacing="-7">LEONARDO</text>
+  <text x="76" y="385" fill="#fffdf5" stroke="#17344d" stroke-width="3" paint-order="stroke fill" font-family="Arial,sans-serif" font-size="105" font-weight="900" letter-spacing="-7">BARBOSA.</text>
+  <text x="82" y="475" fill="#17344d" font-family="Arial,sans-serif" font-size="30">Ideias no ar. Código no mundo real.</text>
 </svg>
