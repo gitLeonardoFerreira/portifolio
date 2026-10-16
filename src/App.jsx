@@ -275,6 +275,7 @@ function Hero() {
     let frame = 0
     function update() {
       const distance = Math.max(0, Math.min(-hero.getBoundingClientRect().top, hero.offsetHeight))
+      hero.style.setProperty('--hero-depth', (distance / hero.offsetHeight).toFixed(3))
       hero.style.setProperty('--cloud-shift', `${Math.round(distance * -0.12)}px`)
       hero.style.setProperty('--sun-shift', `${Math.round(distance * 0.055)}px`)
       frame = 0
@@ -334,6 +335,59 @@ function Hero() {
         <span>
           ROLE PARA EXPLORAR <span className="scroll-line" />
         </span>
+      </div>
+    </section>
+  )
+}
+
+function SkyFlight() {
+  const flightRef = useRef(null)
+
+  useEffect(() => {
+    const flight = flightRef.current
+    if (!flight || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let frame = 0
+
+    function update() {
+      const headerHeight = document.querySelector('.site-header')?.offsetHeight ?? 0
+      const travel = Math.max(1, flight.offsetHeight - (window.innerHeight - headerHeight))
+      const progress = Math.max(
+        0,
+        Math.min(1, (headerHeight - flight.getBoundingClientRect().top) / travel),
+      )
+      const copyOpacity = Math.min(1, progress * 6) * Math.min(1, (1 - progress) * 5)
+      flight.style.setProperty('--flight-progress', progress.toFixed(3))
+      flight.style.setProperty('--flight-copy-opacity', copyOpacity.toFixed(3))
+      frame = 0
+    }
+
+    function scheduleUpdate() {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+
+    window.addEventListener('scroll', scheduleUpdate, { passive: true })
+    window.addEventListener('resize', scheduleUpdate)
+    update()
+    return () => {
+      window.removeEventListener('scroll', scheduleUpdate)
+      window.removeEventListener('resize', scheduleUpdate)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [])
+
+  return (
+    <section ref={flightRef} className="sky-flight" aria-hidden="true">
+      <div className="sky-flight-stage">
+        <div className="sky-flight-horizon" />
+        <div className="sky-flight-ring sky-flight-ring-outer" />
+        <div className="sky-flight-ring sky-flight-ring-inner" />
+        {Array.from({ length: 6 }, (_, index) => (
+          <CartoonCloud key={index} className={`sky-flight-cloud sky-flight-cloud-${index + 1}`} />
+        ))}
+        <div className="sky-flight-copy">
+          <span>DE IDEIA EM IDEIA</span>
+          <strong>Vamos mais longe.</strong>
+        </div>
       </div>
     </section>
   )
@@ -776,6 +830,7 @@ function Home() {
     <>
       <main>
         <Hero />
+        <SkyFlight />
         <ProjectsSection />
         <AboutSection />
         <JourneySection />
