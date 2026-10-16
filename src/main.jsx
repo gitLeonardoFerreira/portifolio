@@ -9,6 +9,7 @@ import '@fontsource/ibm-plex-mono/latin-400.css'
 import '@fontsource/ibm-plex-mono/latin-500.css'
 import './styles.css'
 import './styles-sky.css'
+import './flight.css'
 
 const Router = import.meta.env.BASE_URL === '/portifolio/' ? HashRouter : BrowserRouter
 

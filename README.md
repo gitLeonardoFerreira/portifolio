@@ -26,7 +26,8 @@ npm run preview
 - Edite os estudos de caso em `src/data/projects.js`.
 - O número e a mensagem do WhatsApp ficam em `src/lib/contact.js`.
 - O currículo disponível para download fica em `public/Leonardo_Barbosa_Curriculo.pdf`.
-- Os retratos da seção Sobre ficam em `public/portraits/`, e a ordem das poses fica em `src/data/portraits.js`. O retrato gira automaticamente a cada sete segundos e também pode ser trocado pelo botão. A nuvem da abertura e os cartões de projetos acompanham o scroll. Entre a abertura e os projetos, uma travessia pelo céu usa o scroll nativo para criar profundidade; as animações respeitam a preferência de movimento reduzido.
+- Os retratos da seção Sobre ficam em `public/portraits/`, e a ordem das poses fica em `src/data/portraits.js`. O retrato gira automaticamente enquanto a cena Sobre está ativa e também pode ser trocado pelo botão.
+- Na página principal, o scroll e o toque controlam uma câmera fixa com nove cenas: abertura, três projetos individuais, duas cenas Sobre, trajetória e duas cenas de contato. As nuvens atravessam o cenário e cada conteúdo se aproxima antes de dar lugar ao próximo. Os controles inferiores e o menu permitem saltar entre as cenas. As páginas de detalhes mantêm a leitura convencional, com uma transição de entrada. Quem prefere movimento reduzido vê a estrutura vertical tradicional.
 
 ## Publicação
 
