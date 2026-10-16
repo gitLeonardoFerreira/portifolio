@@ -763,3 +763,278 @@
     animation: none;
   }
 }
+
+/* Movimento do céu: a nuvem apresenta os projetos e os retratos vivem em Sobre. */
+.header-inner.site-container {
+  max-width: none;
+  padding-left: clamp(1rem, 2vw, 2rem);
+  padding-right: clamp(1rem, 2vw, 2rem);
+}
+
+.brand {
+  gap: 1rem;
+}
+
+.brand-cloud {
+  width: 2.8rem;
+  margin-left: -0.2rem;
+}
+
+.hero-cloud-scene {
+  position: relative;
+  width: min(100%, 700px);
+  aspect-ratio: 1.62;
+  margin: -0.5rem auto -1.7rem;
+  transform: translate3d(0, var(--cloud-shift, 0px), 0);
+}
+
+.hero-cloud-link {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.hero-cloud-link:focus-visible {
+  outline-offset: -12px;
+  border-radius: 45%;
+}
+
+.hero-cloud-shape {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #17344d;
+  filter: drop-shadow(0 24px 0 rgba(45, 107, 168, 0.14));
+  animation: cloud-bob 5s ease-in-out infinite;
+}
+
+@keyframes cloud-bob {
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+.hero-cloud-link:hover .hero-cloud-shape {
+  filter: drop-shadow(0 18px 0 rgba(45, 107, 168, 0.2));
+}
+
+.hero-cloud-sun {
+  position: absolute;
+  top: 5%;
+  right: 11%;
+  width: 17%;
+  aspect-ratio: 1;
+  border: 3px solid #17344d;
+  border-radius: 50%;
+  background: #ffe28a;
+  box-shadow: 7px 7px 0 rgba(23, 52, 77, 0.14);
+  transform: translate3d(var(--sun-shift, 0px), 0, 0);
+}
+
+.hero-cloud-spark {
+  position: absolute;
+  top: 28%;
+  left: 7%;
+  color: #1856bc;
+  font-size: 3.2rem;
+  line-height: 1;
+}
+
+.hero-cloud-message {
+  position: absolute;
+  top: 57%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  width: 72%;
+  color: #17344d;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.hero-cloud-message small {
+  color: #1856bc;
+  font: 500 0.7rem/1.2 var(--font-mono);
+  letter-spacing: 0.16em;
+}
+
+.hero-cloud-message strong {
+  font: 700 clamp(3.6rem, 6vw, 5.3rem)/0.9 var(--font-display);
+  text-transform: uppercase;
+}
+
+.hero-cloud-message > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid #17344d;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.hero-cloud-message svg {
+  width: 1rem;
+}
+
+.projects-section {
+  overflow: hidden;
+}
+
+.project-stack {
+  display: grid;
+  gap: clamp(1.7rem, 4vw, 3rem);
+  padding-inline: clamp(0.25rem, 5vw, 4.5rem);
+}
+
+.project-card,
+.project-card:first-child,
+.project-card:nth-child(2),
+.project-card:nth-child(3) {
+  margin: 0;
+  transform: translate3d(var(--card-offset, 0px), 0, 0);
+  will-change: transform;
+}
+
+.project-card-link:hover {
+  transform: translateY(-4px);
+}
+
+.about-grid {
+  grid-template-columns: minmax(290px, 0.95fr) minmax(0, 1.05fr);
+  align-items: start;
+  gap: clamp(2.5rem, 7vw, 7rem);
+}
+
+.about-section,
+.journey-section {
+  overflow-x: clip;
+}
+
+.about-portrait {
+  position: sticky;
+  top: 112px;
+  align-self: start;
+}
+
+.about-portrait .orbit-art {
+  width: min(100%, 520px);
+  margin: 0 auto;
+}
+
+.about-story {
+  min-width: 0;
+}
+
+.about-statement {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.about-statement p {
+  margin: 0;
+  font-size: clamp(1.9rem, 3.5vw, 3.4rem);
+}
+
+.about-details {
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+}
+
+.about-portrait.reveal {
+  transform: translateX(-50px) rotate(-2deg);
+}
+
+.about-story .reveal {
+  transform: translateX(45px);
+}
+
+.journey-item.reveal {
+  transform: translateX(-45px);
+}
+
+.journey-item.reveal:nth-child(even) {
+  transform: translateX(45px);
+}
+
+.contact-form-wrap.reveal {
+  transform: translateX(45px);
+}
+
+.about-portrait.reveal.is-visible,
+.about-story .reveal.is-visible,
+.journey-item.reveal.is-visible,
+.contact-form-wrap.reveal.is-visible {
+  transform: none;
+}
+
+@media (max-width: 760px) {
+  .brand {
+    gap: 0.65rem;
+  }
+
+  .brand-cloud {
+    width: 2.4rem;
+    margin-left: 0;
+  }
+
+  .hero-cloud-scene {
+    width: 108%;
+    margin-left: -4%;
+    margin-bottom: 0;
+  }
+
+  .hero-cloud-message {
+    gap: 0.4rem;
+  }
+
+  .hero-cloud-message strong {
+    font-size: clamp(2.5rem, 10vw, 4.5rem);
+  }
+
+  .hero-cloud-message small {
+    font-size: 0.52rem;
+  }
+
+  .hero-cloud-message > span {
+    font-size: 0.76rem;
+  }
+
+  .hero-cloud-spark {
+    font-size: 2rem;
+  }
+
+  .project-stack {
+    padding-inline: 0.5rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .about-portrait {
+    position: relative;
+    top: auto;
+    width: min(100%, 520px);
+    margin: 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cloud-shape {
+    animation: none;
+  }
+
+  .hero-cloud-scene,
+  .hero-cloud-sun,
+  .project-card,
+  .about-portrait.reveal,
+  .about-story .reveal,
+  .journey-item.reveal,
+  .contact-form-wrap.reveal {
+    transform: none;
+  }
+}

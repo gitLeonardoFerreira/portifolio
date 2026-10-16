@@ -26,7 +26,7 @@ npm run preview
 - Edite os estudos de caso em `src/data/projects.js`.
 - O número e a mensagem do WhatsApp ficam em `src/lib/contact.js`.
 - O currículo disponível para download fica em `public/Leonardo_Barbosa_Curriculo.pdf`.
-- Os retratos usados na abertura ficam em `public/portraits/`, e a ordem das poses fica em `src/data/portraits.js`. O retrato gira automaticamente a cada sete segundos e também pode ser trocado pelo botão; a animação respeita a preferência de movimento reduzido.
+- Os retratos da seção Sobre ficam em `public/portraits/`, e a ordem das poses fica em `src/data/portraits.js`. O retrato gira automaticamente a cada sete segundos e também pode ser trocado pelo botão. A nuvem da abertura e os cartões de projetos acompanham o scroll; as animações respeitam a preferência de movimento reduzido.
 
 ## Publicação
 

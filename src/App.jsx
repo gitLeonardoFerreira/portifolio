@@ -91,13 +91,11 @@ function Header() {
         <Link
           className="brand"
           to="/#inicio"
-          aria-label="léo. — Leonardo Barbosa, voltar ao início"
+          aria-label="léo — Leonardo Barbosa, voltar ao início"
           onClick={() => setOpen(false)}
         >
           <CloudMark className="brand-cloud" />
-          <span>
-            léo<span className="brand-dot">.</span>
-          </span>
+          <span>léo</span>
         </Link>
         <button
           className="menu-toggle"
@@ -163,19 +161,46 @@ function Reveal({ children, className = '', as = 'div' }) {
   )
 }
 
+function CartoonCloud({ className = '' }) {
+  return (
+    <svg className={className} viewBox="0 0 620 410" fill="none" aria-hidden="true">
+      <path
+        d="M110 375c-48 0-85-35-85-79 0-42 33-75 75-79 8-75 63-128 133-128 45 0 87 20 114 55 21-16 45-24 73-24 69 0 124 54 124 121 31 12 51 41 51 72 0 35-29 62-65 62H110Z"
+        fill="white"
+        stroke="currentColor"
+        strokeWidth="5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 function OrbitArt() {
+  const artRef = useRef(null)
   const [perspective, setPerspective] = useState(0)
   const [turning, setTurning] = useState(false)
+  const [visible, setVisible] = useState(false)
   const current = portraits[perspective]
   const next = portraits[(perspective + 1) % portraits.length]
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const node = artRef.current
+    if (!node || typeof IntersectionObserver === 'undefined') return
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), {
+      threshold: 0.25,
+    })
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!visible || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const timer = window.setInterval(() => {
       if (document.visibilityState === 'visible') setTurning(true)
     }, 7000)
     return () => window.clearInterval(timer)
-  }, [])
+  }, [visible])
 
   function turnPortrait() {
     if (turning) return
@@ -194,21 +219,13 @@ function OrbitArt() {
 
   return (
     <div
+      ref={artRef}
       className="orbit-art has-portrait"
       data-perspective={perspective}
       aria-label="Retratos interativos de Leonardo"
     >
       <span className="sky-sun" aria-hidden="true" />
-      <svg className="sky-cloud" viewBox="0 0 620 410" fill="none" aria-hidden="true">
-        <path
-          d="M110 375c-48 0-85-35-85-79 0-42 33-75 75-79 8-75 63-128 133-128 45 0 87 20 114 55 21-16 45-24 73-24 69 0 124 54 124 121 31 12 51 41 51 72 0 35-29 62-65 62H110Z"
-          fill="white"
-          stroke="currentColor"
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      <CartoonCloud className="sky-cloud" />
       <div className="portrait-stage">
         <div
           className={`portrait-turn ${turning ? 'is-turning' : ''}`}
@@ -218,9 +235,16 @@ function OrbitArt() {
             className="orbit-portrait portrait-front"
             src={current.src}
             alt={current.alt}
-            fetchPriority={perspective === 0 ? 'high' : undefined}
+            loading="lazy"
+            decoding="async"
           />
-          <img className="orbit-portrait portrait-back" src={next.src} alt="" />
+          <img
+            className="orbit-portrait portrait-back"
+            src={next.src}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       </div>
       <div className="orbit-controls">
@@ -243,13 +267,36 @@ function OrbitArt() {
 }
 
 function Hero() {
+  const heroRef = useRef(null)
+
+  useEffect(() => {
+    const hero = heroRef.current
+    if (!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let frame = 0
+    function update() {
+      const distance = Math.max(0, Math.min(-hero.getBoundingClientRect().top, hero.offsetHeight))
+      hero.style.setProperty('--cloud-shift', `${Math.round(distance * -0.12)}px`)
+      hero.style.setProperty('--sun-shift', `${Math.round(distance * 0.055)}px`)
+      frame = 0
+    }
+    function onScroll() {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    update()
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [])
+
   return (
-    <section id="inicio" className="hero section-anchor">
+    <section id="inicio" ref={heroRef} className="hero section-anchor">
       <div className="hero-stars" aria-hidden="true" />
       <div className="site-container hero-layout">
         <div className="hero-copy">
           <div className="eyebrow hero-eyebrow">
-            <span className="live-dot" /> DISPONÍVEL PARA ESTÁGIO · SÃO PAULO / REMOTO
+            <span className="live-dot" /> DISPONÍVEL PARA ESTÁGIO · SÃO PAULO
           </div>
           <h1 className="hero-title">
             <span>LEONARDO</span>
@@ -264,13 +311,23 @@ function Hero() {
             Estudante de Engenharia de Software. Crio soluções em Python, web e IA, com interesse
             crescente em cloud security.
           </p>
-          <div className="hero-actions">
-            <Link to="/#projetos" className="button button-primary">
-              Conheça meus projetos <ArrowIcon diagonal />
-            </Link>
-          </div>
         </div>
-        <OrbitArt />
+        <div className="hero-cloud-scene">
+          <span className="hero-cloud-sun" aria-hidden="true" />
+          <span className="hero-cloud-spark" aria-hidden="true">
+            ✳
+          </span>
+          <Link className="hero-cloud-link" to="/#projetos" aria-label="Explorar meus projetos">
+            <CartoonCloud className="hero-cloud-shape" />
+            <span className="hero-cloud-message">
+              <small>PRÓXIMA PARADA</small>
+              <strong>Meus projetos</strong>
+              <span>
+                Explorar <ArrowIcon diagonal />
+              </span>
+            </span>
+          </Link>
+        </div>
       </div>
       <div className="site-container hero-foot">
         <span>PORTFÓLIO / 2026</span>
@@ -371,7 +428,7 @@ function ProjectCard({ project }) {
     event.currentTarget.style.setProperty('--my', `${event.clientY - rect.top}px`)
   }
   return (
-    <Reveal as="article" className={`project-card project-card-${project.color}`}>
+    <article className={`project-card project-card-${project.color}`}>
       <Link
         to={`/projetos/${project.slug}`}
         className="project-card-link"
@@ -399,11 +456,43 @@ function ProjectCard({ project }) {
         </div>
         <ProjectVisual project={project} />
       </Link>
-    </Reveal>
+    </article>
   )
 }
 
 function ProjectsSection() {
+  const stackRef = useRef(null)
+
+  useEffect(() => {
+    const stack = stackRef.current
+    if (!stack || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const cards = [...stack.querySelectorAll('.project-card')]
+    let frame = 0
+    function update() {
+      const viewport = window.innerHeight
+      const amplitude = Math.min(window.innerWidth * 0.1, 125)
+      cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect()
+        const progress = Math.max(0, Math.min(1, (viewport - rect.top) / (viewport + rect.height)))
+        const direction = index % 2 === 0 ? 1 : -1
+        const offset = Math.round((progress - 0.5) * 2 * amplitude * direction)
+        card.style.setProperty('--card-offset', `${offset}px`)
+      })
+      frame = 0
+    }
+    function onScroll() {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    update()
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [])
+
   return (
     <section id="projetos" className="projects-section section-anchor">
       <div className="site-container">
@@ -421,7 +510,7 @@ function ProjectsSection() {
             intro="Da organização de arquivos a fluxos de equipe: cada projeto é uma chance de transformar uma pergunta em software útil."
           />
         </Reveal>
-        <div className="project-stack">
+        <div className="project-stack" ref={stackRef}>
           {projects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
@@ -452,47 +541,51 @@ function AboutSection() {
           />
         </Reveal>
         <div className="about-grid">
-          <Reveal className="about-statement">
-            <CloudMark className="about-cloud" />
-            <p>
-              Gosto de entender <em>como as coisas funcionam</em> — e de encontrar um jeito mais
-              claro, seguro e útil de fazê-las acontecer.
-            </p>
+          <Reveal className="about-portrait">
+            <OrbitArt />
           </Reveal>
-          <Reveal className="about-details">
-            <p>
-              Sou Leonardo Barbosa, estudante do 2º semestre de Engenharia de Software na FIAP, em
-              São Paulo. Tenho me dedicado a backend Python, aplicações web e automação. Também
-              estudo IA e caminho para a área de cloud security.
-            </p>
-            <p>
-              Antes do código, trabalhei coordenando entregas e operações criativas. Essa
-              experiência me ensinou a lidar com prioridades, colaborar e transformar demandas
-              abertas em próximos passos concretos — algo que hoje levo para o desenvolvimento de
-              software.
-            </p>
-            <div className="about-facts">
-              <div>
-                <span>BASE</span>
-                <strong>São Paulo, SP</strong>
+          <div className="about-story">
+            <Reveal className="about-statement">
+              <p>
+                Gosto de entender <em>como as coisas funcionam</em> — e de encontrar um jeito mais
+                claro, seguro e útil de fazê-las acontecer.
+              </p>
+            </Reveal>
+            <Reveal className="about-details">
+              <p>
+                Sou Leonardo Barbosa, estudante do 2º semestre de Engenharia de Software na FIAP, em
+                São Paulo. Tenho me dedicado a backend Python, aplicações web e automação. Também
+                estudo IA e caminho para a área de cloud security.
+              </p>
+              <p>
+                Antes do código, trabalhei coordenando entregas e operações criativas. Essa
+                experiência me ensinou a lidar com prioridades, colaborar e transformar demandas
+                abertas em próximos passos concretos — algo que hoje levo para o desenvolvimento de
+                software.
+              </p>
+              <div className="about-facts">
+                <div>
+                  <span>BASE</span>
+                  <strong>São Paulo, SP</strong>
+                </div>
+                <div>
+                  <span>FORMAÇÃO</span>
+                  <strong>Engenharia de Software · FIAP</strong>
+                </div>
+                <div>
+                  <span>OBJETIVO</span>
+                  <strong>Estágio em desenvolvimento de software</strong>
+                </div>
               </div>
-              <div>
-                <span>FORMAÇÃO</span>
-                <strong>Engenharia de Software · FIAP</strong>
-              </div>
-              <div>
-                <span>OBJETIVO</span>
-                <strong>Estágio · presencial, híbrido ou remoto</strong>
-              </div>
-            </div>
-            <a
-              className="text-link about-resume"
-              href={`${import.meta.env.BASE_URL}Leonardo_Barbosa_Curriculo.pdf`}
-              download
-            >
-              Baixar currículo <ArrowIcon diagonal />
-            </a>
-          </Reveal>
+              <a
+                className="text-link about-resume"
+                href={`${import.meta.env.BASE_URL}Leonardo_Barbosa_Curriculo.pdf`}
+                download
+              >
+                Baixar currículo <ArrowIcon diagonal />
+              </a>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>
@@ -644,7 +737,7 @@ function Footer() {
     <footer className="site-footer">
       <div className="site-container footer-inner">
         <Link className="footer-brand" to="/#inicio">
-          léo<span>.</span>
+          léo
         </Link>
         <p>Feito com curiosidade, código e um pouco de céu.</p>
         <div className="footer-links">
