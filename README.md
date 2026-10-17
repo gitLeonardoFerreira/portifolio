@@ -1,17 +1,78 @@
-# Portfólio de Leonardo Barbosa
+<div align="center">
+  <a href="https://gitleonardoferreira.github.io/portifolio/">
+    <img src="public/og-image.png" alt="Céu azul com nuvem branca e o nome Leonardo Barbosa: Ideias no ar, código no mundo real" width="100%" />
+  </a>
+  <br />
+  <a href="https://gitleonardoferreira.github.io/portifolio/">Acessar o portfólio</a>
+  &nbsp;·&nbsp;
+  <a href="docs/prompts/README.md">Conhecer os prompts e o processo criativo</a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/gitLeonardoFerreira/portifolio/actions/workflows/pages.yml">
+    <img src="https://github.com/gitLeonardoFerreira/portifolio/actions/workflows/pages.yml/badge.svg" alt="Estado da publicação no GitHub Pages" />
+  </a>
+</div>
 
-Portfólio em português feito com React, JavaScript, Vite e Tailwind CSS. A página inicial apresenta Leonardo e três projetos; cada projeto tem um estudo de caso próprio.
+<br />
 
-## Desenvolvimento
+<table>
+  <tr>
+    <td width="68%" valign="middle">
+      <h1>Oi, eu sou o Leonardo.</h1>
+      <p>Estudante de Engenharia de Software na FIAP, em São Paulo. Gosto de transformar problemas concretos em aplicações claras e úteis — de automações em Python a produtos web.</p>
+      <p>Este portfólio é um espaço para mostrar <strong>o que construí, como penso e o que estou aprendendo</strong>. Procuro uma oportunidade de estágio para continuar essa trajetória.</p>
+      <p><strong>React · JavaScript · Vite · Tailwind CSS</strong></p>
+    </td>
+    <td width="32%" align="center" valign="middle">
+      <img src="public/portraits/leonardo-bracos-cruzados.png" alt="Retrato de Leonardo Barbosa sorrindo, de braços cruzados" width="240" />
+    </td>
+  </tr>
+</table>
 
-Requer Node.js 20.19+ ou 22.12+ e npm.
+<div align="center">
+  <a href="#uma-viagem-pelo-céu">A experiência</a>
+  &nbsp;·&nbsp;
+  <a href="#projetos-em-destaque">Projetos</a>
+  &nbsp;·&nbsp;
+  <a href="#executar-localmente">Executar</a>
+  &nbsp;·&nbsp;
+  <a href="#processo-criativo">Processo criativo</a>
+</div>
+
+## Uma viagem pelo céu
+
+A página inicial mantém o céu em cena enquanto a rolagem, o toque ou os controles inferiores conduzem o visitante por **nove paradas**. Os conteúdos se aproximam como se a câmera avançasse entre nuvens; cada projeto tem seu próprio momento de leitura. Quem prefere movimento reduzido recebe uma versão com rolagem vertical convencional.
+
+| Trecho da viagem | O que aparece                                                      |
+| ---------------- | ------------------------------------------------------------------ |
+| 01 · Abertura    | Apresentação de Leonardo e convite para explorar                   |
+| 02–04 · Projetos | Rastro, Smart File Organizer e Cálculo de Frete, um por cena       |
+| 05–07 · Sobre    | Retratos com troca de pose, história e trajetória                  |
+| 08–09 · Contato  | Convite à conversa e formulário que prepara a mensagem no WhatsApp |
+
+Os estudos de caso têm páginas próprias, com leitura convencional e uma curta transição de entrada. O menu permite ir diretamente a uma seção; os controles da cena também funcionam no celular.
+
+## Projetos em destaque
+
+| Projeto                                                                                                  | O problema explorado                                                                  | Tecnologias                  | Estado                                     |
+| -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------- | ------------------------------------------ |
+| [Rastro](https://gitleonardoferreira.github.io/portifolio/#/projetos/rastro)                             | Acompanhar solicitações, responsáveis e confirmação da solução sem perder o histórico | React, FastAPI, PostgreSQL   | Versão local funcional; sem demo hospedada |
+| [Smart File Organizer](https://gitleonardoferreira.github.io/portifolio/#/projetos/smart-file-organizer) | Organizar arquivos com regras configuráveis e prévia antes de movê-los                | Python, CLI, YAML            | Código público                             |
+| [Cálculo de Frete](https://gitleonardoferreira.github.io/portifolio/#/projetos/calculo-de-frete)         | Conectar formulário, API e regra de cálculo em um projeto de aprendizado              | React, Express, Tailwind CSS | Em evolução; sem demo hospedada            |
+
+As páginas explicam o problema, a solução, decisões técnicas e aprendizados, com links para os respectivos repositórios. O site não atribui métricas ou demonstrações inexistentes aos projetos.
+
+## Executar localmente
+
+Use Node.js **20.19+ ou 22.12+** e npm:
 
 ```bash
+git clone https://github.com/gitLeonardoFerreira/portifolio.git
+cd portifolio
 npm ci
 npm run dev
 ```
 
-Abra o endereço informado pelo Vite. Para validar antes de publicar:
+Abra o endereço mostrado pelo Vite. Para conferir a versão antes de publicar:
 
 ```bash
 npm run lint
@@ -21,21 +82,52 @@ npm run build
 npm run preview
 ```
 
-## Conteúdo
+<details>
+<summary><strong>Como o projeto está organizado</strong></summary>
 
-- Edite os estudos de caso em `src/data/projects.js`.
-- O número e a mensagem do WhatsApp ficam em `src/lib/contact.js`.
-- O currículo disponível para download fica em `public/Leonardo_Barbosa_Curriculo.pdf`.
-- Os retratos da seção Sobre ficam em `public/portraits/`, e a ordem das poses fica em `src/data/portraits.js`. O retrato gira automaticamente enquanto a cena Sobre está ativa e também pode ser trocado pelo botão.
-- Na página principal, o scroll e o toque controlam uma câmera fixa com nove cenas: abertura, três projetos individuais, duas cenas Sobre, trajetória e duas cenas de contato. As nuvens atravessam o cenário e cada conteúdo se aproxima antes de dar lugar ao próximo. Os controles inferiores e o menu permitem saltar entre as cenas. As páginas de detalhes mantêm a leitura convencional, com uma transição de entrada. Quem prefere movimento reduzido vê a estrutura vertical tradicional.
+| Caminho                                       | Responsabilidade                                      |
+| --------------------------------------------- | ----------------------------------------------------- |
+| `src/App.jsx`                                 | Cenas do voo, navegação, estudos de caso e formulário |
+| `src/flight.css`                              | Movimento e composição da experiência de voo          |
+| `src/styles.css` e `src/styles-sky.css`       | Estilos da interface e da identidade de céu           |
+| `src/data/projects.js`                        | Conteúdo dos três projetos                            |
+| `src/data/portraits.js` e `public/portraits/` | Ordem, legendas e fotos das poses                     |
+| `src/lib/contact.js`                          | Validação e montagem da mensagem para o WhatsApp      |
+| `public/Leonardo_Barbosa_Curriculo.pdf`       | Currículo disponível para download                    |
+| [`docs/prompts/`](docs/prompts/README.md)     | Pedidos originais, refinamentos e prompt consolidado  |
 
-## Publicação
+O formulário abre o WhatsApp com a conversa preenchida para que a pessoa revise e envie a mensagem. Ele não envia dados silenciosamente em segundo plano.
 
-O GitHub Pages publica automaticamente a branch `main` pelo fluxo `.github/workflows/pages.yml`. A compilação usa a base `/portifolio/` e rotas com `#`, permitindo abrir os estudos de caso na prévia pública. Para conferir localmente:
+</details>
+
+<details>
+<summary><strong>Publicação e acessibilidade</strong></summary>
+
+O workflow [Publicar prévia no GitHub Pages](.github/workflows/pages.yml) valida o código e publica automaticamente a branch `main`. O build usa a base `/portifolio/` e `HashRouter`, permitindo abrir os estudos de caso diretamente no GitHub Pages:
 
 ```bash
 GITHUB_PAGES=true npm run build
 GITHUB_PAGES=true npm run preview
 ```
 
-O projeto também pode ser importado na Vercel como aplicação Vite. Nesse caso, `vercel.json` encaminha as rotas dos estudos de caso para o aplicativo React.
+O projeto também está preparado para a Vercel: fora do GitHub Pages, usa `BrowserRouter`, com redirecionamento de rotas em `vercel.json`.
+
+A experiência oferece navegação por teclado, foco visível, rótulos para controles, alternativas para interações por toque e uma versão estável para `prefers-reduced-motion`.
+
+</details>
+
+## Processo criativo
+
+O projeto evoluiu por iterações: um primeiro briefing editorial, a mudança para um céu azul-claro com fotos na seção Sobre e, por fim, a navegação em voo que continua até o contato. A pasta [**Prompts e decisões do portfólio**](docs/prompts/README.md) separa as solicitações originais dos refinamentos e de uma síntese posterior da versão publicada. Isso permite acompanhar o raciocínio sem confundir ideias iniciais com o resultado final.
+
+---
+
+<div align="center">
+  <strong>Ideias no ar. Código no mundo real.</strong>
+  <br />
+  <a href="https://gitleonardoferreira.github.io/portifolio/">Portfólio</a>
+  &nbsp;·&nbsp;
+  <a href="https://www.linkedin.com/in/leonardo-barbosa-102615-">LinkedIn</a>
+  &nbsp;·&nbsp;
+  <a href="mailto:leomurilobarbosa@gmail.com">E-mail</a>
+</div>
