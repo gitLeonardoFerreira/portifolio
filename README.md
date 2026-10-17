@@ -14,19 +14,13 @@
 
 <br />
 
-<table>
-  <tr>
-    <td width="68%" valign="middle">
-      <h1>Oi, eu sou o Leonardo.</h1>
-      <p>Estudante de Engenharia de Software na FIAP, em São Paulo. Gosto de transformar problemas concretos em aplicações claras e úteis — de automações em Python a produtos web.</p>
-      <p>Este portfólio é um espaço para mostrar <strong>o que construí, como penso e o que estou aprendendo</strong>. Procuro uma oportunidade de estágio para continuar essa trajetória.</p>
-      <p><strong>React · JavaScript · Vite · Tailwind CSS</strong></p>
-    </td>
-    <td width="32%" align="center" valign="middle">
-      <img src="public/portraits/leonardo-bracos-cruzados.png" alt="Retrato de Leonardo Barbosa sorrindo, de braços cruzados" width="240" />
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <img src="public/portraits/leonardo-bracos-cruzados.png" alt="Retrato de Leonardo Barbosa sorrindo, de braços cruzados" width="190" />
+  <h1>Oi, eu sou o Leonardo.</h1>
+  <p>Estudante de Engenharia de Software na FIAP, em São Paulo. Gosto de transformar problemas concretos em aplicações claras e úteis — de automações em Python a produtos web.</p>
+  <p>Este portfólio é um espaço para mostrar <strong>o que construí, como penso e o que estou aprendendo</strong>. Procuro uma oportunidade de estágio para continuar essa trajetória.</p>
+  <p><strong>React · JavaScript · Vite · Tailwind CSS</strong></p>
+</div>
 
 <div align="center">
   <a href="#uma-viagem-pelo-céu">A experiência</a>
