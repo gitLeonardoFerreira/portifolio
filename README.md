@@ -5,7 +5,7 @@
   <br />
   <a href="https://gitleonardoferreira.github.io/portifolio/">Acessar o portfólio</a>
   &nbsp;·&nbsp;
-  <a href="docs/prompts/README.md">Conhecer os prompts e o processo criativo</a>
+  <a href="prompts.md">Ver os prompts do projeto</a>
   &nbsp;·&nbsp;
   <a href="https://github.com/gitLeonardoFerreira/portifolio/actions/workflows/pages.yml">
     <img src="https://github.com/gitLeonardoFerreira/portifolio/actions/workflows/pages.yml/badge.svg" alt="Estado da publicação no GitHub Pages" />
@@ -88,7 +88,7 @@ npm run preview
 | `src/data/portraits.js` e `public/portraits/` | Ordem, legendas e fotos das poses                     |
 | `src/lib/contact.js`                          | Validação e montagem da mensagem para o WhatsApp      |
 | `public/Leonardo_Barbosa_Curriculo.pdf`       | Currículo disponível para download                    |
-| [`docs/prompts/`](docs/prompts/README.md)     | Pedidos originais, refinamentos e prompt consolidado  |
+| [`prompts.md`](prompts.md)                    | Prompts relevantes usados no desenvolvimento          |
 
 O formulário abre o WhatsApp com a conversa preenchida para que a pessoa revise e envie a mensagem. Ele não envia dados silenciosamente em segundo plano.
 
@@ -112,7 +112,7 @@ A experiência oferece navegação por teclado, foco visível, rótulos para con
 
 ## Processo criativo
 
-O projeto evoluiu por iterações: um primeiro briefing editorial, a mudança para um céu azul-claro com fotos na seção Sobre e, por fim, a navegação em voo que continua até o contato. A pasta [**Prompts e decisões do portfólio**](docs/prompts/README.md) separa as solicitações originais dos refinamentos e de uma síntese posterior da versão publicada. Isso permite acompanhar o raciocínio sem confundir ideias iniciais com o resultado final.
+O projeto evoluiu por iterações: um primeiro briefing editorial, a mudança para um céu azul-claro com fotos na seção Sobre e, por fim, a navegação em voo que continua até o contato. Os pedidos usados nesse processo estão reunidos em [`prompts.md`](prompts.md).
 
 ---
 
